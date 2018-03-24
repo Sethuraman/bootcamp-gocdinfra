@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<cruise xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="cruise-config.xsd" schemaVersion="100">
+  <server artifactsdir="artifacts" agentAutoRegisterKey="079e578b-87cc-46c9-9ab5-88997fc7ac59" webhookSecret="74c84e38-ecd7-4485-b89f-2c5d8cbca928" commandRepositoryLocation="default" serverId="c4100666-f490-408b-8161-bbf75f9eb398" tokenGenerationKey="3666f684-f416-4d7d-b728-1a91e13282c3" />
+  <config-repos>
+  </config-repos>
+  <pipelines group="team1" />
+  <pipelines group="team2" />
+  <pipelines group="team3" />
+  <environments>
+    <environment name="ci">
+    </environment>
+  </environments>
+</cruise>

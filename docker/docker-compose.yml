@@ -1,0 +1,22 @@
+version: '2'
+
+services:
+  agent-nodejs:
+    image: regsethu/bootcamp-gocdagent:1.0.0
+    depends_on:
+      - server
+    environment:
+      GO_SERVER_URL: https://server:8154/go
+      AGENT_AUTO_REGISTER_KEY: 079e578b-87cc-46c9-9ab5-88997fc7ac59
+      AGENT_AUTO_REGISTER_RESOURCES: node-and-java
+      AGENT_AUTO_REGISTER_ENVIRONMENTS: ci
+    volumes:
+      - $PWD/.ssh:/home/go/.ssh
+      
+  server:
+    image: regsethu/bootcamp-gocdserver:1.0.0
+    volumes:
+      - $PWD/.ssh:/home/go/.ssh
+    ports:
+      - "8153:8153"
+      - "8154:8154"
