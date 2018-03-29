@@ -7,7 +7,7 @@ Parameters:
     Description: The SSH key name
   tagName:
     Type: String
-    Description: The training session name such as bootcampFeb2018 or extendedPaatshalaMarch2018  
+    Description: The training session name such as bootcamp-feb-2018 or extended-paatshala-march-2018
 
 Mappings:
   regionMap:
@@ -61,7 +61,7 @@ Resources:
               yum update -y
               yum install -y docker
               usermod -a -G docker ec2-user
-              curl -L https://github.com/docker/compose/releases/download/1.9.0/docker-compose-`uname -s`-`uname -m` | sudo tee /usr/local/bin/docker-compose > /dev/null
+              curl -L https://github.com/docker/compose/releases/download/1.20.1/docker-compose-`uname -s`-`uname -m` | sudo tee /usr/local/bin/docker-compose > /dev/null
               chmod +x /usr/local/bin/docker-compose
               service docker start
               chkconfig docker on
@@ -76,8 +76,7 @@ Resources:
   EBS:
     Type: AWS::EC2::Volume
     Properties:
-      #todo: need to make this higher
-      Size: 8
+      Size: 16
       AvailabilityZone: !GetAtt EC2.AvailabilityZone
 
   MountPoint:
