@@ -8,10 +8,10 @@
 # To set up the bootcamp infra do the below
 
 
-1. On AWS first create an ssh key pair under EC2. This is to allow you to login to the boxes you will be creating. Download the .pem file and store it safely. Also set the file permissions to ```chmod 400 <your pem file>```
+1. On AWS first create an ssh key pair in the aws region where EC2 is going to be deployed. This is to allow you to login to the boxes you will be creating. Download the .pem file and store it safely. Also set the file permissions to ```chmod 400 <your pem file>```
 2. Install aws cli locally by running ```brew install awscli```
 3. Get your access key and secret key from the aws console.
-4. Run ```aws configure``` and enter your access key and secret key and store that in your local aws credentials. This will make it easier to run the below commands.
+4. Run ```aws configure``` and enter your access key, secret key and aws region store that in your local aws credentials. This will make it easier to run the below commands.
 5. Clone the git@github.com:Sethuraman/bootcamp-gocdinfra.git locally.
 6. Run the below command
     ```
@@ -24,7 +24,7 @@
     ```
         AWS_ACCESS_KEY_ID = *****
         AWS_SECRET_ACCESS_KEY = ****
-        AWS_REGION = *****
+        AWS_DEFAULT_REGION = *****
     ```
 11. Now you need to get the ssh key of the go box and add it to the repos you want to build. This is needed for your go box to clone the repos in order to build.
     1. Logon to the go box - ```ssh -i <the downloaded pem file from step 1>  ec2-user@<public ip of the go box>```

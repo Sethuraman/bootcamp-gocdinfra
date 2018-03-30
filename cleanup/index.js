@@ -16,16 +16,16 @@ const clearAllBuckets = async () => {
   }
 };
 
+const removeApiCommonStack = (stacksData) => {
+  return stacksData.Stacks.filter((stack) => {
+    return !stack.StackName.includes("api-common"); 
+  });
+};
 
-const pushApiCommonStackToTheEnd = (stacksData) => {
-  return stacksData.Stacks.reduce((accumulator, stack) => {
-    if (stack.StackName.includes("api-common")) {
-      accumulator.push(stack);
-    } else {
-      accumulator.unshift(stack);
-    }
-    return accumulator;
-  }, [])
+const getApiCommonStack = (stacksData) => {
+  return stacksData.Stacks.find((stack) => {
+    return stack.StackName.includes("api-common"); 
+  });
 };
 
 const deleteStack = async (stack) => {
@@ -38,15 +38,23 @@ const deleteAllStacks = async () => {
   const { stdout, stderr } = await run("aws cloudformation describe-stacks");
   if(stderr) logAndExit(stderr);
   const stacksData = JSON.parse(stdout);
-  const stacks = pushApiCommonStackToTheEnd(stacksData);
-
+  const stacks = removeApiCommonStack(stacksData);
+  
   Promise.all(stacks.map(stack => deleteStack(stack)))
     .then(outputs => {
       for(let output of outputs){
         if(output.stderr) logAndExit(output.stderr)
       }
-      allWorkDone = true;
-    })
+
+      const apiCommonStack = getApiCommonStack(stacksData);
+      deleteStack(apiCommonStack).then(
+        output => {
+          if(output.stderr) logAndExit(output.stderr)
+          allWorkDone = true;
+        }
+      );
+
+    });
 };
 
 
