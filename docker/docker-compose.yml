@@ -2,7 +2,7 @@ version: '2'
 
 services:
   agent-nodejs:
-    image: regsethu/bootcamp-gocdagent:1.0.0
+    image: regsethu/bootcamp-gocdagent:2.0.0
     depends_on:
       - server
     environment:
