@@ -28,12 +28,14 @@ RUN apt update && \
     chmod +x /usr/local/bin/docker-compose
 
 ENV PATH="/opt/node-v${NODE_VERSION}-linux-x64/bin/:/${PATH}"
-ENV JAVA_HOME="/usr/java/jdk-10.0.1"
+ENV JAVA_10_HOME="/usr/java/jdk-10.0.1"
 
 
 RUN npm install \
     cfn-create-or-update@1.1.2 \
     -g
+
+COPY scripts /scripts
 
 COPY godata /godata
 RUN chown -R go:go /godata
